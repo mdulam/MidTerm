@@ -17,7 +17,7 @@ swaggerDefinition: {
     contact: {
       name:' sai meghana dulam'
     },
-    servers:["http://localhost:3000"]
+    servers:["http://159.65.32.112:3000"]
   }
 },
 apis: ["app.js"]
@@ -75,7 +75,7 @@ app.get("/api/v1/events", (req, res, next) => {
           eventDescription: doc.eventDescription,
           request: {
             type: "GET",
-            url: "http://localhost:3000/api/v1/events/" + doc._id
+            url: "http://159.65.32.112:3000/api/v1/events/" + doc._id
           }
         };
       })
@@ -114,7 +114,7 @@ Event.findById(req.params.eventID)
     event: event,
     request: {
       type: "GET",
-      url: "http://localhost:3000/api/v1/events"
+      url: "http://159.65.32.112:3000/api/v1/events"
     }
   });
 })
@@ -205,7 +205,7 @@ Event.updateMany({_id: eventID},{$set:{eventTitle:req.body.eventTitle, eventDate
         message: 'Event updated',
         request: {
             type: 'GET',
-            url: 'http://localhost:3000/api/v1/events/' + eventID
+            url: 'http://159.65.32.112:3000/api/v1/events/' + eventID
         }
     });
   }).catch(errMsg => {
@@ -242,7 +242,7 @@ Event.updateOne({_id: eventID},{$set:{eventDate:req.body.eventDate}})
         message: 'Event updated',
         request: {
             type: 'GET',
-            url: 'http://localhost:3000/api/v1/events/' + eventID
+            url: 'http://159.65.32.112:3000/api/v1/events/' + eventID
         }
     });
   }).catch(errMsg => {
@@ -274,7 +274,7 @@ app.delete("/api/v1/events/:eventID", (req, res, next) => {
       message: "Event deleted",
       request: {
         type: "GET",
-        url: "http://localhost:3000/api/v1/events"
+        url: "http://159.65.32.112:3000/api/v1/events"
       }
     });
   }).catch(errMsg => {
@@ -288,7 +288,7 @@ app.delete("/api/v1/events/:eventID", (req, res, next) => {
 
 
 app.get('/event',function(req,res){
-  fetch('http://localhost:3000/api/v1/events').then(res => res.json()).then(json => {
+  fetch('http://159.65.32.112:3000/api/v1/events').then(res => res.json()).then(json => {
       res.render('events',{eventsData: json.events});
   })
 
@@ -306,7 +306,7 @@ app.post('/addEvent', function(req, res){
       'eventDate':req.body.date,
       'eventDescription':req.body.description
   };
-  fetch('http://localhost:3000/api/v1/events/', {
+  fetch('http://159.65.32.112:3000/api/v1/events/', {
       method: 'POST',
       body: JSON.stringify(body),
       headers: { 'Content-Type': 'application/json' }
@@ -322,7 +322,7 @@ app.post('/updateEvent', function(req, res){
     'eventDescription':req.body.description
 };
 
-fetch('http://localhost:3000/api/v1/events/'+req.body.eventId, {
+fetch('http://159.65.32.112:3000/api/v1/events/'+req.body.eventId, {
   method: 'PUT',
   body: JSON.stringify(body),
   headers: { 'Content-Type': 'application/json' }
