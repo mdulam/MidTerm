@@ -218,7 +218,7 @@ Event.updateMany({_id: eventID},{$set:{eventTitle:req.body.eventTitle, eventDate
 /**
 * @swagger
 * /api/v1/events/{eventID}:
-*   put:
+*   patch:
 *    description: update an particular event details with all fields
 *    parameters:
  *     - name: eventDate
