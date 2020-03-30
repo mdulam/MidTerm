@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Events Page</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="assets/styles/stylesheet.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		const deleteEvent = function (id) {
+			let deleteUrl = 'http://localhost:3000/api/v1/events/' + id;
+			$.ajax({
+				url: deleteUrl,
+				contentType: "application/json",
+				dataType: 'json',
+				type: "DELETE",
+				success: function (result) {
+					window.location.href = '/event';
+				}
+			})
+		};
+
+		const updateEvent= function (id, title, date, description){
+			document.getElementById('id01').style.display='block';
+			document.getElementById('eventId').value=id;
+			document.getElementById('title').value=title;
+			document.getElementById('date').value=date;
+			document.getElementById('description').value=description;
+
+		}
+	</script>
+</head>
+
+<body>
+	<%- include ('partials/header.ejs'); %>
+	<%- include ('partials/navigation.ejs') -%>
+
+	<main>
+		<table id="customers">
+			<tr>
+				<th>Title</th>
+				<th>Date</th>
+				<th>Description</th>
+				<th></th>
+				<th></th>
+			</tr>
+			<% eventsData.forEach(item => { %>
+			<tr>
+				<td><%= item.eventTitle %></td>
+				<td><%= item.eventDate %></td>
+				<td><%= item.eventDescription %></td>
+				<td><button type="submit" class="button button2" onclick="updateEvent('<%= item._id %>', '<%= item.eventTitle %>', '<%= item.eventDate %>', '<%= item.eventDescription %>')" style="width:auto;">Update</button></td>
+				<td> <button type="submit" class="button button3" onclick="deleteEvent ('<%= item._id %>')">Delete</button></td>
+			</tr>
+			<% }) %>
+
+		</table>
+
+		<div id="id01" class="modal">
+			<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+			<form class="modal-content" action="/updateEvent" method="POST">
+			  <div class="container">
+				<hr>
+				<label for="eventId">Id</label>
+				<input type="text" id="eventId" name="eventId" readonly>
+
+				<label for="title">Title</label>
+				<input type="text" id="title" name="title" placeholder="Enter Title..">
+			
+				<label for="date">Date</label>
+				<input type="date" id="date" name="date" placeholder="Your date.">
+			
+				<label for="description">Description</label>
+				<input type="text" id="description" name="description" placeholder="Enter Your description.">
+				
+				<div class="clearfix">
+				  <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+				  <button type="submit" class="signupbtn">Update</button>
+				</div>
+			  </div>
+			</form>
+		  </div>
+
+	</main>
+	<%- include ('partials/footer.ejs'); -%>
+</body>
+
+</html>

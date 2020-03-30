@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>New Connection Page</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="assets/styles/stylesheet.css">
+	</head>
+	<body>
+    <%- include ('partials/header.ejs'); %>
+	<%- include ('partials/navigation.ejs') -%>
+
+
+    <main>
+		<div id="newevent">
+			<form action="/addEvent" method="POST">
+			  <label for="title">Title</label>
+			  <input type="text" id="title" name="title" placeholder="Enter Title..">
+		  
+			  <label for="date">Date</label>
+			  <input type="date" id="date" name="date" placeholder="Your date.">
+		  
+			  <label for="description">Country</label>
+			  <input type="text" id="description" name="description" placeholder="Enter Your description.">
+			  <input type="submit" value="Submit">
+			</form>
+		  </div>
+      </main>
+    <%- include ('partials/footer.ejs'); -%>
+	</body>
+</html>
